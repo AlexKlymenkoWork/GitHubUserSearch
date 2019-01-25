@@ -3,5 +3,3 @@
 Using React, GraphQL, Axios.
 
 GitHub user search
-
-Live preview [ ]().
