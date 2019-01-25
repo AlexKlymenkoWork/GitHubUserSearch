@@ -1,15 +1,9 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 const TITLE = 'GitHub user search';
 
-<<<<<<< Updated upstream
-const key = '85522ee64d864cff1e61484703ccd72f58037c60';
-=======
-const key = '398141e37fbb0a547cba044a56b946cb6a313b7c';
->>>>>>> Stashed changes
+const key = 'bc71434457909492d70126f3e7b07c124a05c809';
 
 const axiosGitHubGraphQL = axios.create({
   baseURL: 'https://api.github.com/graphql',
@@ -36,10 +30,7 @@ const getIssuesOfRepository = path => {
 
   return axiosGitHubGraphQL.post('', {
     query: GET_ISSUES_OF_REPOSITORY,
-    variables: {
-      user,
-      repository
-    }
+    variables: { user, repository }
   });
 };
 
@@ -60,9 +51,7 @@ class App extends Component {
   }
 
   onChange = event => {
-    this.setState({
-      path: event.target.value
-    });
+    this.setState({ path: event.target.value });
   };
 
   onSubmit = event => {
@@ -78,116 +67,67 @@ class App extends Component {
   };
 
   render() {
-    const {
-      path,
-      user,
-      errors
-    } = this.state;
+    const { path, user, errors } = this.state;
 
-    return ( <
-      div className = 'wrapper' >
-      <
-      div className = 'main' >
-      <
-      div className = 'container' >
-      <
-      div className = 'row' >
-      <
-      div className = 'form-container' >
-      <
-      h2 className = 'title-container' > {
-        TITLE
-      } < /h2> <
-      form onSubmit = {
-        this.onSubmit
-      } >
-      <
-      input id = 'url'
-      type = 'text'
-      value = {
-        path
-      }
-      onChange = {
-        this.onChange
-      }
-      /> <
-      button type = 'submit' > Search < /button> < /
-      form > {
-        user ? ( <
-          User user = {
-            user
-          }
-          errors = {
-            errors
-          }
-          />
-        ) : ( <
-          p > No information yet... < /p>
-        )
-      } <
-      /div> < /
-      div > <
-      /div> < /
-      div > <
-      /div>
+    return (
+      <div className='wrapper'>
+        <div className='main'>
+          <div className='container'>
+            <div className='row'>
+              <div className='form-container'>
+                <h2 className='title-container'>{TITLE}</h2>
+                <form onSubmit={this.onSubmit}>
+                  <input
+                    id='url'
+                    type='text'
+                    value={path}
+                    onChange={this.onChange}
+                  />
+                  <button type='submit'>Search</button>
+                </form>
+                {user ? (
+                  <User user={user} errors={errors} />
+                ) : (
+                  <p>No information yet ...</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
-const User = ({
-  user,
-  errors
-}) => {
+const User = ({ user, errors }) => {
   if (errors) {
-    return ( <
-        p >
-        <
-        strong className = 'info__error' > Something went wrong: < /strong> {
-        errors.map(error => error.message).join(' ')
-      } <
-      /p>
-  );
-}
+    return (
+      <p>
+        <strong className='info__error'>Something went wrong:</strong>
+        {errors.map(error => error.message).join(' ')}
+      </p>
+    );
+  }
 
-return ( <
-  div className = 'info__info' >
-  <
-  p >
-  Photo: < img src = {
-    user.avatarUrl
-  }
-  alt = 'img'
-  style = {
-    {
-      width: '10rem'
-    }
-  }
-  /> < /
-  p > <
-  p >
-  User: < a href = {
-    user.url
-  } > {
-    user.name
-  } < /a> < /
-  p > <
-  p >
-  User bio: < span className = 'info__key' > {
-    user.bio
-  } < /span> < /
-  p > <
-  p >
-  Company: < span className = 'info__key' > {
-    user.company
-  } < /span> < /
-  p > <
-  p >
-  Email: < span className = 'info__key' > {
-    user.email
-  } < /span> < /
-  p > <
-  /div>
-);
+  return (
+    <div className='info__info'>
+      <p>
+        Photo: <img src={user.avatarUrl} alt='img' style={{ width: '10rem' }} />
+      </p>
+      <p>
+        User: <a href={user.url}>{user.name}</a>
+      </p>
+      <p>
+        User bio: <span className='info__key'> {user.bio} </span>
+      </p>
+      <p>
+        Company: <span className='info__key'> {user.company} </span>
+      </p>
+      <p>
+        Email: <span className='info__key'> {user.email} </span>
+      </p>
+    </div>
+  );
 };
 
 export default App;
