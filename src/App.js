@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const TITLE = 'GitHub user search';
 
-const key = 'bc71434457909492d70126f3e7b07c124a05c809';
+const key = '4204ae1ecdc63fee74b8b07b4f6b088efe8a8035';
 
 const axiosGitHubGraphQL = axios.create({
   baseURL: 'https://api.github.com/graphql',
